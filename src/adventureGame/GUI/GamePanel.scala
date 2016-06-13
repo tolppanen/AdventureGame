@@ -40,7 +40,7 @@ class GamePanel(var game: Game) extends GridPanel(rows0 = 15, cols0 = 20) {
 
           if (character.moving) {
             character.direction match {
-              case "RIGHT" => g.drawImage(character.getImage, x * tileSize + 7 * animationPhase - 25, y * tileSize, null)
+              case "RIGHT" => g.drawImage(character.getImage, x * tileSize + 7 * animationPhase -50, y * tileSize, null)
               case "LEFT" => g.drawImage(character.getImage, x * tileSize - 7 * animationPhase + 25, y * tileSize, null)
               case "UP" => g.drawImage(character.getImage, x * tileSize, y * tileSize - 7 * animationPhase + 25, null)
               case "DOWN" => g.drawImage(character.getImage, x * tileSize, y * tileSize + 7 * animationPhase + 25, null)

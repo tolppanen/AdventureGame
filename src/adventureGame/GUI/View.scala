@@ -81,22 +81,17 @@ object View extends SimpleSwingApplication {
       if (rightKey) {
         player.moving = true
         player.direction = "RIGHT"
-      } 
-      else if(leftKey) {
-         player.moving = true
+      } else if (leftKey) {
+        player.moving = true
         player.direction = "LEFT"
-      }
-      else if(upKey) {
-         player.moving = true
+      } else if (upKey) {
+        player.moving = true
         player.direction = "UP"
-      }
-      else if(downKey) {
-         player.moving = true
+      } else if (downKey) {
+        player.moving = true
         player.direction = "DOWN"
-      }
-      else {
+      } else {
         player.moving = false
-        println(player.getX())
         player.hasFinishedMoving = true
       }
       if (gamePanel.animationPhase >= 6) player.moveToDirection(player.direction)
