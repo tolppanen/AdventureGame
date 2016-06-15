@@ -8,6 +8,8 @@ import java.io.File
 class Entity(var x: Int, var y: Int, val map: Level, var content: String) extends Type {
 
   val npcImage: BufferedImage = ImageIO.read(new File("assets/npc.png"))
+  val grassImage: BufferedImage = ImageIO.read(new File("assets/grass.jpg"))
+  val wallImage: BufferedImage = ImageIO.read(new File("assets/wall.png"))
 
   var direction = "down" //Default direction should be down, this is for the sprites
 
@@ -30,6 +32,8 @@ class Entity(var x: Int, var y: Int, val map: Level, var content: String) extend
   def getImage(): BufferedImage = {
     content match {
       case "NPC" => npcImage
+      case "grass" => grassImage
+      case "wall" => wallImage
     }
   }
 

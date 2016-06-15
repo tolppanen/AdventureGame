@@ -38,36 +38,15 @@ object View extends SimpleSwingApplication {
 
       listenTo(keys)
       reactions += {
-        case KeyPressed(_, Key.Right, _, _) => {
-          rightKey = true
-          //          player.direction = "RIGHT"
-          //          player.moving = true
-        }
-        case KeyPressed(_, Key.Left, _, _) => {
-          leftKey = true
-        }
-        case KeyPressed(_, Key.Down, _, _) => {
-          downKey = true
-        }
-        case KeyPressed(_, Key.Up, _, _) => {
-          upKey = true
-        }
-        case KeyReleased(_, Key.Right, _, _) => {
-          rightKey = false
-          gamePanel.animationPhase = 0
-        }
-        case KeyReleased(_, Key.Left, _, _) => {
-          leftKey = false
-          gamePanel.animationPhase = 0
-        }
-        case KeyReleased(_, Key.Down, _, _) => {
-          downKey = false
-          gamePanel.animationPhase = 0
-        }
-        case KeyReleased(_, Key.Up, _, _) => {
-          upKey = false
-          gamePanel.animationPhase = 0
-        }
+        case KeyPressed(_, Key.Right, _, _) => rightKey = true
+        case KeyPressed(_, Key.Left, _, _) => leftKey = true
+        case KeyPressed(_, Key.Down, _, _) => downKey = true
+        case KeyPressed(_, Key.Up, _, _) => upKey = true
+        case KeyPressed(_, Key.Space, _, _) => //do something
+        case KeyReleased(_, Key.Right, _, _) => rightKey = false
+        case KeyReleased(_, Key.Left, _, _) => leftKey = false
+        case KeyReleased(_, Key.Down, _, _) => downKey = false
+        case KeyReleased(_, Key.Up, _, _) => upKey = false
 
       }
       focusable = true
@@ -92,9 +71,13 @@ object View extends SimpleSwingApplication {
         player.direction = "DOWN"
       } else {
         player.moving = false
-        player.hasFinishedMoving = true
+        //        player.hasFinishedMoving = true
       }
-      if (gamePanel.animationPhase >= 6) player.moveToDirection(player.direction)
+      if (gamePanel.animationPhase >= 6) {
+        //player.moving = false
+        player.hasFinishedMoving = true
+        player.moveToDirection(player.direction)
+      }
       newGame.updateGame()
       gamePanel.repaint()
     }

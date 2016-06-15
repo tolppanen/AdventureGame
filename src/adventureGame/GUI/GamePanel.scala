@@ -17,6 +17,7 @@ class GamePanel(var game: Game) extends GridPanel(rows0 = 15, cols0 = 20) {
 
     val level = game.currentLevel
     val positions = level.characterGrid
+    val background = level.levelGrid
 
     if (animationPhase < 6) animationPhase += 1
     else {
@@ -26,26 +27,26 @@ class GamePanel(var game: Game) extends GridPanel(rows0 = 15, cols0 = 20) {
 
     for (x <- 0 until level.width) {
       for (y <- 0 until level.height) {
-        val tile = level.levelGrid(x)(y)
-        g.setColor(tile.getColor())
-        g.fillRect(x * tileSize, y * tileSize, tileSize, tileSize)
+        val levelTile = background(x)(y)
+        if (levelTile != null) g.drawImage(levelTile.getImage(), x * tileSize, y * tileSize, null)
       }
     }
 
     for (x <- 0 until level.width) {
       for (y <- 0 until level.height) {
+
+        val character = positions(x)(y)
+
         if (positions(x)(y) != null) {
 
-          val character = positions(x)(y)
-
           if (character.moving) {
+            character.movingPhase = animationPhase
             character.direction match {
-              case "RIGHT" => g.drawImage(character.getImage, x * tileSize + 7 * animationPhase -50, y * tileSize, null)
-              case "LEFT" => g.drawImage(character.getImage, x * tileSize - 7 * animationPhase + 25, y * tileSize, null)
-              case "UP" => g.drawImage(character.getImage, x * tileSize, y * tileSize - 7 * animationPhase + 25, null)
-              case "DOWN" => g.drawImage(character.getImage, x * tileSize, y * tileSize + 7 * animationPhase + 25, null)
+              case "RIGHT" => g.drawImage(character.getImage, x * tileSize + 7 * animationPhase - 50, y * tileSize, null)
+              case "LEFT" => g.drawImage(character.getImage, x * tileSize - 7 * animationPhase + 50, y * tileSize, null)
+              case "UP" => g.drawImage(character.getImage, x * tileSize, y * tileSize - 7 * animationPhase + 50, null)
+              case "DOWN" => g.drawImage(character.getImage, x * tileSize, y * tileSize + 7 * animationPhase - 50, null)
             }
-            println(x * tileSize + 5 * animationPhase - 50)
           } else g.drawImage(character.getImage, x * tileSize, y * tileSize, null)
         }
       }
